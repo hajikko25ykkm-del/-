@@ -1,20 +1,30 @@
 <section class="user-profile">
-  <h2><%= @user.name %> さんのレシピ集</h2>
 
+  <h2><%= @user.name %> さんのレシピ集</h2>
   <% if @user == current_user %>
     <%= link_to "プロフィールを編集", edit_user_path(@user), class: "btn-edit" %>
   <% end %>
 
-  <hr>
+</section>
 
+<hr>
+
+<section class="user-posts">
+
+  <h3>投稿したレシピ</h3>
   <div class="post-grid">
-    <% @posts.each do |post| %>
-      <div class="post-card">
-        <% if post.image.attached? %>
-          <%= image_tag post.image, class: "post-image-square" %>
-        <% end %>
-        <p><%= link_to post.title, post_path(post) %></p>
-      </div>
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="post-card">
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "200x200" %>
+          <% end %>
+          <h3><%= post.title %></h3>
+          <%= link_to "詳細を見る", post_path(post) %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>まだ投稿はありません。</p>
     <% end %>
   </div>
 

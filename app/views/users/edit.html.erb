@@ -19,9 +19,6 @@
   <% end %>
 
   <h3>アカウントの削除</h3>
-    <%= button_to "退会する", user_registration_path, 
-      method: :delete, 
-      class: "btn btn-danger",
-      onclick: "return confirm('本当に退会しますか？\n投稿したデータもすべて消去されます。');" %>
+  <%= button_to "退会する", user_registration_path, method: :delete, class: "btn btn-danger", onclick: "return confirm('本当に退会しますか？');" %>
 
 </div>
