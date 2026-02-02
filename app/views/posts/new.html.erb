@@ -15,31 +15,31 @@
 
   <div class="field">
     <%= f.label :title, "レシピ名" %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "input-field" %>
   </div>
 
   <div class="field">
     <%= f.label :body, "説明" %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, class: "input-field large-field" %>
   </div>
 
   <div class="field">
     <%= f.label :image, "画像" %>
-    <%= f.file_field :image %>
+    <%= f.file_field :image, class: "input-field" %>
   </div>
 
   <div class="field">
     <%= f.label :ingredients, "材料" %>
-    <%= f.text_area :ingredients %>
+    <%= f.text_area :ingredients, class: "input-field large-field" %>
   </div>
 
   <div class="field">
     <%= f.label :process, "作り方" %>
-    <%= f.text_area :process %>
+    <%= f.text_area :process, class: "input-field large-field" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "投稿" %>
+    <%= f.submit "投稿", class: "btn-submit" %>
   </div>
 
 <% end %>

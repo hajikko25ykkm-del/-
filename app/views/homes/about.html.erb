@@ -1,17 +1,24 @@
 <div class="about-container">
-  <section class="about-hero">
-    <h1>About Sweets Book</h1>
-    <p>お菓子作りを愛する、すべてのパティシエへ</p>
-  </section>
+  <%= link_to "Top", root_path, class: "bookmark-link" %>
 
-  <section class="about-content">
-    <div class="concept-card">
-      <h2>「こだわり」をカタチに</h2>
-      <p>
-        材料の比率、オーブンの癖、混ぜる回数…。<br>
-        お菓子作りにおける「正解」は、一つではありません。<br>
-        あなたのノートに刻まれた試行錯誤は、他の誰かにとっての「ヒント」になります。
+  <section class="about-back-cover">
+    <div class="book-spine-line"></div> <div class="about-content">
+      <h2>Sweets Book について</h2>
+      <p class="concept-text">
+        美味しい記憶を、一生モノのレシピに。<br>
+        このノートは、あなたのキッチンで生まれた小さな奇跡を<br>
+        大切に書き留めるための場所です。
       </p>
-    </div>
 
+      <div class="author-section">
+        <h3>Author</h3>
+        <p>お菓子作りを愛するすべての人たちへ</p>
+      </div>
+
+      <div class="back-cover-actions">
+        <%= link_to "ノートを開く（ログイン）", new_user_session_path, class: "btn-back-cover" %>
+      </div>
+    </div>
+  </section>
+  
 </div>

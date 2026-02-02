@@ -1,14 +1,42 @@
-<div class="hero-section">
-  <h1>Sweets Book</h1>
-  
-  <p>パティシエたちの「秘密のレシピ」と「こだわり」が繋がる場所</p>
-  
-</div>
+<div class="top-background">
+  <div class="book-container">
+    <div class="book-open">
+      <div class="book-left">
+        <div class="book-image-wrapper">
+          <%= image_tag 'PF用写真/macarons.jpg', class: "hero-image" %>
+        </div>
+      </div>
 
-<section class="community-intro">
-  <h2>お菓子の「コツ」を、みんなで共有。</h2>
-  <p>
-    一人で悩むお菓子作りは、もう終わり。<br>
-    あなたの試行錯誤が、誰かの最高の一皿に変わります。
-  </p>
-</section>
+      <div class="book-right">
+        <div class="hero-section">
+          <h1>Sweets Book</h1>
+          <p class="sub-title">「秘密のレシピ」と「こだわり」が繋がる場所</p>
+        </div>
+
+        <section class="community-intro">
+          <h2>お菓子作りの「コツ」を、みんなで共有</h2>
+          <p>
+            一人で悩むお菓子作りは、もう終わり<br>
+            あなたのレシピが、誰かの最高の一皿に変わります
+          </p>
+        </section>
+
+        <section class="top-cta">
+          <div class="cta-content">
+            <h3>一緒にお菓子作ってみませんか？</h3>
+            
+            <div class="cta-actions">
+              <% if user_signed_in? %>
+                <%= link_to "ノートを書く", new_post_path, class: "btn-main" %>
+              <% else %>
+                <%= link_to "新規登録する", new_user_registration_path, class: "btn-signup" %>
+                <%= link_to "ログイン", new_user_session_path, class: "btn-login-link" %>
+              <% end %>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
