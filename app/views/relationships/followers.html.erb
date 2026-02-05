@@ -1,7 +1,10 @@
-<h2>フォロワー</h2>
-<% @users.each do |user| %>
-  <p>
-    <%= user.name %>
-    <%= render "relationships/btn", user: user %>
-  </p>
-<% end %>
+<div class="user-list-container" style="max-width: 600px; margin: 0 auto;">
+  <h2>フォロワー</h2>
+  <% if @users.exists? %>
+    <% @users.each do |user| %>
+      <%= render 'user_list', user: user %>
+    <% end %>
+  <% else %>
+    <p style="text-align: center; color: #888;">フォロワーはいません。</p>
+  <% end %>
+</div>

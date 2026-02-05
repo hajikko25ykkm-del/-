@@ -41,6 +41,16 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "退会が完了しました", status: :see_other
   end
 
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.followings # 「フォローしている人」のリストを @users に入れる
+  end
+
+  def follows
+    @user  = User.find(params[:id])
+    @users = @user.followers  # 「フォローされている人」のリストを @users に入れる
+  end
+
   private
 
   def user_params
