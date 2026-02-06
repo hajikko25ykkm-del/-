@@ -26,6 +26,9 @@
             <%= image_tag post.image, size: "200x200" %>
           <% end %>
           <h3><%= post.title %></h3>
+
+          <%= render "favorite/btn", post: post %>
+
           <%= link_to "詳細を見る", post_path(post) %>
         </div>
       <% end %>
