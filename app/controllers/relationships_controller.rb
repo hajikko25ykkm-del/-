@@ -1,4 +1,4 @@
-class RelationshipsController < ApplicationController
+class RelationshipsController < ApplicationController # フォロー・フォロワー機能のコントローラー
   def create
     user = User.find(params[:user_id])
     current_user.follow(user)

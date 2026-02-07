@@ -1,5 +1,15 @@
 class PostsController < ApplicationController
-  
+  def search
+    if params[:keyword].present? # タイトルにキーワードが含まれる投稿を検索（LIKE句,≒あいまい検索）
+      @posts = Post.where('title LIKE ?', "%#{params[:keyword]}%")
+    else
+      @posts = Post.none # キーワードがなければ空にする
+    end
+
+    @posts = Post.where("title LIKE ?", "%#{params[:keyword]}%") # 検索処理
+    render :index
+  end
+
   def index
     if user_signed_in? # ログインしている人には、公開ユーザーと自分がフォローしているユーザーの投稿を表示 
       @posts = Post.joins(:user).where(
@@ -8,7 +18,7 @@ class PostsController < ApplicationController
         current_user.following_ids, 
         current_user.id
       ).order(created_at: :desc)
-    else # ログインしていない人には、公開ユーザーの投稿だけ表示
+    else               # ログインしていない人には、公開ユーザーの投稿だけ表示
       @posts = Post.joins(:user).where(users: { privacy: false }).order(created_at: :desc)
     end
   end
