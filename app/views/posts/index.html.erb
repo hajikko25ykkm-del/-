@@ -1,5 +1,6 @@
 <section class="post-index">
-  <h2>投稿一覧</h2>
+  <h2 class="index-title">投稿一覧</h2>
+
   <div class="search-form">
     <%= form_with url: search_posts_path, method: :get, local: true do |form| %>
       <%= form.label :keyword, "キーワード検索:" %>
@@ -19,16 +20,17 @@
               <%= image_tag post.image %>
             <% end %>
           </div>
-          <%= render "favorites/btn", post: post %>
+
           <div class="post-info">
             <h3 class="post-title"><%= post.title %></h3>
-            <p class="post-user">作成者: <%= post.user.name %></p>
-            <%= link_to post.user.name, user_path(post.user) %>
+            <p class="post-user"><span>投稿者: </span> <%= post.user.name %></p>
             <div class="post-date">投稿日: <%= post.created_at.strftime('%Y/%m/%d') %></div>
           </div>
         </div>
       <% end %>
+      <div class="fav-btn-pos">
+        <%= render "favorites/btn", post: post %>
+      </div>
     <% end %>
   </div>
-
 </section>

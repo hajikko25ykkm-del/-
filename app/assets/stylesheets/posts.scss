@@ -2,91 +2,103 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-/* 投稿一覧 */
-.post-card-link {
-  text-decoration: none; /* 下線を消す */
-  color: inherit;        /* 文字色を親（黒など）に合わせる */
-  width: calc((100% - 60px) / 3); /* 3枚並びの幅 */
-  display: block;        /* リンクをブロック要素にする（重要！） */
-  transition: transform 0.2s; /* 動きをなめらかに */
-
-  &:hover {
-    transform: translateY(-5px); /* マウスを乗せると少し浮く演出 */
-    .post-card {
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* 影を強くする */
-    }
-    .view-detail {
-      color: #ff9900; /* ホバー時に「詳細を見る」の色を変える */
-    }
-  }
+/* 全体のトーン */
+:root {
+  --sweet-brown: #6d4c41; /* 温かみのある茶色 */
+  --light-brown: #8d6e63;
+  --bg-cream: #fffaf0;    /* クリーム色の背景（お好みで） */
 }
 
+.post-index {
+  max-width: 1200px;  /* 全体の幅を制限して中央に寄せる */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.index-title {
+  color: var(--sweet-brown);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 投稿一覧のグリッド（中央配置） */
 .post-grid {
   display: flex;
-  flex-wrap: wrap;       /* 折り返しを許可 */
-  gap: 20px;             /* カード同士の隙間 */
-  width: 100%;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 30px;           /* カード同士の隙間を少し広めに */
+  justify-content: center; /* これで中央に寄る */
 }
 
-/* リンク（aタグ）自体を「3枚並びのカード」として扱う */
-.post-card-link {
-  display: block;        /* ブロック要素にする */
-  text-decoration: none; /* 下線を消す */
-  color: inherit;        /* 文字色を黒にする */
-  
-  /* 3枚並びの計算：隙間20pxが2箇所(40px)あるので、それを引いて3で割る */
-  width: calc((100% - 40px) / 3); 
-  
-/* ★重要：大きくなりすぎず、小さくなりすぎない範囲を指定 */
-  max-width: 350px;  /* これ以上は大きくならない */
-  min-width: 280px;  /* これ以上は小さくならない（文字が縦になるのを防ぐ） */
-  
-  flex-shrink: 0;
-  flex-grow: 1;      /* 隙間があるときは少しだけ広がるようにしてバランスをとる */
-  
-  /* ホバー時の動き（お好みで） */
-  &:hover {
-    .post-card {
-      border-color: #ff9900; /* 枠の色を変える */
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-  }
+/* カードを包む箱（ここで3枚並びを制御） */
+.post-card-container {
+  width: calc((100% - 60px) / 3); /* 3枚並び */
+  min-width: 300px;    /* これ以上小さくなると次の行へ */
+  max-width: 350px;
+  position: relative;
 }
 
 .post-card {
-  width: 100%;           /* 親の .post-card-link いっぱいに広がる */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
   background: #fff;
-  height: 100%;          /* 全てのカードの高さを揃える */
-  display: flex;
-  flex-direction: column;
+  border-radius: 15px; /* 少し丸みを強めて可愛く */
+  border: 1px solid #efebe9;
+  box-shadow: 0 4px 10px rgba(109, 76, 65, 0.1);
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.3s ease;
+}
 
-  .post-image img {
-    width: 100%;
-    height: 180px;       /* 画像が大きすぎないよう調整 */
-    object-fit: cover;   /* 比率を保って切り抜き */
-  }
+/* 浮くアニメーション */
+.post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(109, 76, 65, 0.15);
+}
 
-  .post-info {
-    padding: 12px;
-    
-    h3 {
-      font-size: 1rem;
-      margin: 0 0 5px 0;
-      white-space: nowrap;   /* 1行に収める */
-      overflow: hidden;
-      text-overflow: ellipsis; /* 長い場合は ... にする */
-    }
+/* 画像部分 */
+.post-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
 
-    p {
-      font-size: 0.8rem;
-      color: #666;
-      margin: 0;
-    }
-  }
+/* テキスト情報（茶色系） */
+.post-info {
+  padding: 15px;
+  color: var(--sweet-brown);
+}
+
+.post-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--sweet-brown);
+}
+
+.post-user {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: var(--light-brown);
+}
+
+.post-user span {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  text-align: right;
+  color: #a1887f;
+}
+
+/* お気に入りボタンの微調整 */
+.fav-btn-pos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  padding: 5px;
 }
 
 
