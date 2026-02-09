@@ -19,6 +19,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :genre_id, "ジャンル" %><br>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, { prompt: "選択してください" } %>
+  </div>
+
+  <div class="field">
     <%= f.label :body, "説明" %>
     <%= f.text_area :body, class: "input-field large-field" %>
   </div>
