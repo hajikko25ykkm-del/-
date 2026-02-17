@@ -6,17 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 # 開発用ユーザーの作成
 user = User.find_or_create_by!(email: "kuma25@gmail.com") do |u|
-  u.password = "kuma25"
+  u.password = "password"
 end
 
 # ジャンルの作成
-Genre.find_or_create_by!(name: '和菓子')
-Genre.find_or_create_by!(name: '洋菓子')
-Genre.find_or_create_by!(name: 'パン')
-Genre.find_or_create_by!(name: 'ケーキ')
-Genre.find_or_create_by!(name: 'プリン')
-Genre.find_or_create_by!(name: 'クッキー')
+['和菓子', '洋菓子', 'パン'].each do |genre_name|
+  Genre.find_or_create_by!(name: genre_name)
+end
 
 puts "ユーザーとジャンルの初期データ登録が完了しました！"
