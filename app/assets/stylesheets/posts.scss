@@ -25,16 +25,21 @@
 .post-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;           /* カード同士の隙間を少し広めに */
-  justify-content: center; /* これで中央に寄る */
+  gap: 30px;           /* カード同士の隙間調整 */
+  justify-content: center;
 }
 
-/* カードを包む箱（ここで3枚並びを制御） */
 .post-card-container {
   width: calc((100% - 60px) / 3); /* 3枚並び */
   min-width: 300px;    /* これ以上小さくなると次の行へ */
   max-width: 350px;
   position: relative;
+}
+
+.post-card-link {
+  text-decoration: none; /* 下線を消す */
+  color: inherit;        /* 文字色を親要素から引き継ぐ（黒やグレーのままにする） */
+  display: block;        /* カード全体をクリック可能にするためにブロック要素化 */
 }
 
 .post-card {
@@ -67,6 +72,8 @@
 }
 
 .post-title {
+  margin: 0;
+  text-decoration: none;
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 8px;

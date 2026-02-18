@@ -22,16 +22,20 @@
   <div class="post-grid">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="post-card">
-          <% if post.image.attached? %>
-            <%= image_tag post.image, size: "200x200" %>
-          <% end %>
+        <%= link_to post_path(post), class: "post-card-link" do %>
+          <div class="post-card">
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "200x200" %>
+            <% end %>
 
-          <%= render "favorites/btn", post: post %>
+            <h3><%= post.title %></h3>
+            <%= link_to "詳細を見る", post_path(post) %>
+          </div>
 
-          <h3><%= post.title %></h3>
-          <%= link_to "詳細を見る", post_path(post) %>
-        </div>
+          <div class="post-favorite-btn">
+            <%= render "favorites/btn", post: post %>
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <p>まだ投稿はありません。</p>
