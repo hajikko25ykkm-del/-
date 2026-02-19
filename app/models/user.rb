@@ -17,6 +17,19 @@ class User < ApplicationRecord
   #フォローされる側の設定
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+
+  GUEST_USER_EMAIL = "guest@example.com"
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_WMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      use.name = "guestuser"
+    end
+  end
+
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
   def follow(user) # userをフォローする
     active_relationships.create(followed_id: user.id)
   end

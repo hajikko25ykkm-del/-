@@ -18,10 +18,11 @@
       <%= f.text_field :name, class: "input-form" %>
     </div>
 
-    <div class="field">
-      <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, class: "input-form" %>
-    </div>
+    <% unless @user.guest_user? %>
+      <div class='row'>
+        <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+      </div>
+    <% end %>
 
     <div class="field">
       <%= f.label :privacy, "プロフィール公開設定" %>
