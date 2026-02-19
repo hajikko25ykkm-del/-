@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
@@ -18,16 +18,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-  end
-
-  def update_privacy
-    current_user.toggle!(:privacy)
-    redirect_to mypage_path, notice: "公開設定を変更しました"
+    @user = User.find(params[:id])
   end
 
   def update
     if @user.update(user_params)
-      redirect_to mypage_path, notice: "アカウント情報を更新しました。"
+      redirect_to user_path(@user), notice: "アカウント情報を更新しました。"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -55,17 +51,16 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :privacy)
   end
 
+  def ensure_guest_user
+    if current_user.guest_user?
+      redirect_to new_user_session_path, notice: "ゲストはこの操作はできません。会員登録してください。"
+    end
+  end
+
   def ensure_correct_user
     @user = User.find(params[:id])
     if @user != current_user
       redirect_to user_path(current_user), alert: "他人のプロフィールを編集することはできません"
-    end
-  end
-
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      redirect_to user_path(current_user), notice: "ゲストユーザーのプロフィールは編集できません。"
     end
   end
 

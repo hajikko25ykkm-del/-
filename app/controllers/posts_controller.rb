@@ -1,14 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def search
-    if params[:keyword].present? # タイトルにキーワードが含まれる投稿を検索（LIKE句,≒あいまい検索）
-      @posts = Post.where('title LIKE ?', "%#{params[:keyword]}%")
-    else
-      @posts = Post.none # キーワードがなければ空にする
-    end
-
     @posts = Post.where("title LIKE ?", "%#{params[:keyword]}%") # 検索処理
     render :index
   end
@@ -71,6 +66,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :image, :genre_id)
+  end
+
+  def ensure_guest_user
+    if current_user.guest_user?
+      redirect_to new_user_session_path, notice: "ゲストはこの操作はできません。会員登録してください。"
+    end
   end
 
   def ensure_correct_user

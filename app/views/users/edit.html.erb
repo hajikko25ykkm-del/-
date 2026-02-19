@@ -20,15 +20,15 @@
 
     <% unless @user.guest_user? %>
       <div class='row'>
-        <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+        <%= link_to '',edit_user_path(@user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{@user.id}" %>
       </div>
     <% end %>
 
     <div class="field">
       <%= f.label :privacy, "プロフィール公開設定" %>
       <div class="privacy-options">
-        <%= f.radio_button :privacy, false %><%= f.label :privacy_false, "公開" %>
-        <%= f.radio_button :privacy, true %><%= f.label :privacy_true, "非公開" %>
+        <%= f.radio_button :privacy, false %><%= f.label :privacy, "公開", value: false %>
+        <%= f.radio_button :privacy, true %><%= f.label :privacy, "非公開", value: true %>
       </div>
     </div>
 
