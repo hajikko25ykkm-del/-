@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def search
-    @posts = Post.where("title LIKE ?", "%#{params[:keyword]}%") # 検索処理
+    @posts = Post.where("title LIKE ?", "%#{params[:keyword]}%")
     render :index
   end
 
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
         current_user.following_ids, 
         current_user.id
       ).order(created_at: :desc)
-    else               # ログインしていない人には、公開ユーザーの投稿だけ表示
+    else # ログインしていない人には、公開ユーザーの投稿のみ表示
       @posts = Post.joins(:user).where(users: { privacy: false }).order(created_at: :desc)
     end
   end
@@ -63,22 +63,13 @@ class PostsController < ApplicationController
   end
 
   private
-
   def post_params
     params.require(:post).permit(:title, :body, :image, :genre_id)
   end
-
-  def ensure_guest_user
-    if current_user.guest_user?
-      redirect_to new_user_session_path, notice: "ゲストはこの操作はできません。会員登録してください。"
-    end
-  end
-
   def ensure_correct_user
     @post = Post.find(params[:id])
     if @post.user_id != current_user.id
       redirect_to posts_path, alert: "他人の投稿を編集・削除することはできません"
     end
   end
-
 end

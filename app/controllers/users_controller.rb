@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.privacy && !current_user.following?(@user) && @user != current_user
-      redirect_to posts_path, alert: "このユーザーのプロフィールは非公開です。フォローすると閲覧できます。"
+      redirect_to posts_path, alert: "このユーザーのプロフィールは非公開です。"
       return
     end
     @posts = @user.posts.order(created_at: :desc)
@@ -35,33 +35,24 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "退会が完了しました", status: :see_other
   end
 
-  def following
+  def following  # 「フォローしている人」のリスト
     @user  = User.find(params[:id])
-    @users = @user.followings # 「フォローしている人」のリストを @users に入れる
+    @users = @user.followings
   end
 
-  def follows
+  def follows    # 「フォローされている人」のリスト
     @user  = User.find(params[:id])
-    @users = @user.followers  # 「フォローされている人」のリストを @users に入れる
+    @users = @user.followers
   end
 
   private
-
   def user_params
     params.require(:user).permit(:name, :email, :privacy)
   end
-
-  def ensure_guest_user
-    if current_user.guest_user?
-      redirect_to new_user_session_path, notice: "ゲストはこの操作はできません。会員登録してください。"
-    end
-  end
-
   def ensure_correct_user
     @user = User.find(params[:id])
     if @user != current_user
       redirect_to user_path(current_user), alert: "他人のプロフィールを編集することはできません"
     end
   end
-
 end

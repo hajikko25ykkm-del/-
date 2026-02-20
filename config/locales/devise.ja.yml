@@ -1,0 +1,41 @@
+ja:
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが違います。"
+      not_foudn_in_database: "メールアドレスまたはパスワードが違います。"
+      already_authenticated: "すでにログインしています。"
+      unauthenticated: "ログインまたは新規登録してください。"
+    registrations:
+      signed_up: "アカウントが作成されました。"
+      updated: "アカウントが更新されました。"
+      destroyed: "アカウントが削除されました。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      invalid: "メールアドレスまたはパスワードが違います。"
+  activerecord:
+    models:
+      user: "ユーザー"
+      post: "投稿"
+      genre: "ジャンル"
+    attributes:
+      user:
+        name: "ユーザー名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        privacy: "公開設定"
+      post:
+        title: "タイトル"
+        body: "本文"
+        image: "画像"
+        genre_id: "ジャンル"
+        genre: "ジャンル"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      required: "を入力してください"
+      blank: "を入力してください"
+      invalid: "は不正な値です"
+      taken: "はすでに存在します"
+      too_short: "は%{count}文字以上で入力してください"
